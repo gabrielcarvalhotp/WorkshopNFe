@@ -1,0 +1,67 @@
+unit Workshop.Model.Fiscal.Nfe.Command.Ide;
+
+interface
+
+uses
+  Workshop.Model.GOF.Command.Interfaces,
+  Workshop.Model.Fiscal.Nfe.Interfaces;
+
+type
+  TFiscalNFeCommandIde = class(TInterfacedObject, ICommand)
+  private
+    FParent: IFiscalNfe;
+    constructor Create(Parent: IFiscalNfe);
+    destructor Destroy; override;
+  public
+    class function New(Parent: IFiscalNfe): ICommand;
+    function Execute: ICommand;
+  end;
+
+implementation
+
+uses
+  System.SysUtils, pcnConversao, pcnConversaoNFe;
+
+constructor TFiscalNFeCommandIde.Create(Parent: IFiscalNfe);
+begin
+  FParent := Parent;
+end;
+
+destructor TFiscalNFeCommandIde.Destroy;
+begin
+
+  inherited;
+end;
+
+function TFiscalNFeCommandIde.Execute: ICommand;
+begin
+  Result := Self;
+  with FParent.Component.AddNotaFiscal.NotaFiscal.NFe do
+  begin
+     Ide.cNF       := 0; //StrToInt(NumNFe); //Caso não seja preenchido será gerado um número aleatório pelo componente
+     Ide.natOp     := 'VENDA PRODUCAO DO ESTAB.';
+     Ide.indPag    := ipVista;
+     Ide.modelo    := 55;
+     Ide.serie     := 1;
+     Ide.nNF       := 0; //StrToInt(NumNFe);
+     Ide.dEmi      := Date;
+     Ide.dSaiEnt   := Date;
+     Ide.hSaiEnt   := Now;
+     Ide.tpNF      := tnSaida;
+     Ide.tpEmis    := teNormal; //TpcnTipoEmissao(cbFormaEmissao.ItemIndex); ;
+     Ide.tpAmb     := taHomologacao;  //Lembre-se de trocar esta variável quando for para ambiente de produção
+     Ide.verProc   := '1.0.0.0'; //Versão do seu sistema
+     Ide.cUF       := UFtoCUF('MG');
+     Ide.cMunFG    := 0; //StrToInt(edtEmitCodCidade.Text);
+     Ide.finNFe    := fnNormal;
+     if Assigned(FParent.Component.This.DANFE ) then
+       Ide.tpImp := FParent.Component.This.DANFE.TipoDANFE;
+  end;
+end;
+
+class function TFiscalNFeCommandIde.New(Parent: IFiscalNfe): ICommand;
+begin
+  Result := Self.Create(Parent);
+end;
+
+end.

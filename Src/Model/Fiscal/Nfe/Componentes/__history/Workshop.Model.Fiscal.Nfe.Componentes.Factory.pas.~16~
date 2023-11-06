@@ -1,0 +1,51 @@
+unit Workshop.Model.Fiscal.Nfe.Componentes.Factory;
+
+interface
+
+uses
+  ACBrNFe,
+  Workshop.Model.Fiscal.Nfe.Componentes.Interfaces,
+  Workshop.Model.Fiscal.Nfe.Componentes.ACBr;
+
+type
+  TFiscalNFeComponentesFactory = class(TInterfacedObject, IFiscalNFeComponentesFactory)
+  private
+    FACBr: TDtmACBrNfe;
+    constructor Create;
+    destructor Destroy; override;
+  public
+    class function New: IFiscalNFeComponentesFactory;
+    function ACBr: IFiscalNFeComponentes<TACBrNFe>;
+  end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+function TFiscalNFeComponentesFactory.ACBr: IFiscalNFeComponentes<TACBrNFe>;
+begin
+  if not Assigned(FACBr) then
+     FACBr := TDtmACBrNfe.Create(nil);
+  Result := FACBr;
+end;
+
+constructor TFiscalNFeComponentesFactory.Create;
+begin
+
+end;
+
+destructor TFiscalNFeComponentesFactory.Destroy;
+begin
+  inherited;
+  if Assigned(FACBr) then
+    FreeAndNil(FACBr);
+end;
+
+class function TFiscalNFeComponentesFactory.New
+  : IFiscalNFeComponentesFactory;
+begin
+  Result := Self.Create;
+end;
+
+end.

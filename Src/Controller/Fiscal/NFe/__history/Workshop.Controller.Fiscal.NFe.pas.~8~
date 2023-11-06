@@ -1,0 +1,42 @@
+unit Workshop.Controller.Fiscal.NFe;
+
+interface
+
+uses
+  Workshop.Utils.Types,
+  Workshop.Model.GOF.Observer.Interfaces,
+  Workshop.Controller.Fiscal.NFe.Interfaces,
+  Workshop.Model.Fiscal.Nfe.Interfaces,
+  Workshop.Controller.Fiscal.NFe.Observer;;
+
+type
+  TControllerFiscalNFe = class(TInterfacedObject, IControllerFiscalNFe)
+  private
+    FObserver: IObserver<string>;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New: IControllerFiscalNFe;
+    function NFe: IModelFiscalNfe;
+    function Notify(AEvent: TEvNotify): IControllerFiscalNFe;
+  end;
+
+implementation
+
+constructor TControllerFiscalNFe.Create;
+begin
+
+end;
+
+destructor TControllerFiscalNFe.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TMinhaClasse.New: iMinhaClasse;
+begin
+  Result := Self.Create;
+end;
+
+end.

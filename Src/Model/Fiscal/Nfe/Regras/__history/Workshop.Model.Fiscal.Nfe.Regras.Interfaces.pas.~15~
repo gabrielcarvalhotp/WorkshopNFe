@@ -1,0 +1,35 @@
+unit Workshop.Model.Fiscal.Nfe.Regras.Interfaces;
+
+interface
+
+uses
+  Workshop.Model.Fiscal.Nfe.Interfaces;
+
+type
+  IModelFiscalNfeRegrasImposto = interface;
+  IVisitor = interface;
+
+  IModelFiscalNfeRegras = interface
+    ['{3BD7420A-3D90-43B7-9EEC-CAAAC00473D1}']
+    function ProdutoImpostoICMS: IModelFiscalNfeRegras;
+    function Visitor: IVisitor;
+  end;
+
+  IModelFiscalNfeRegrasImposto = interface
+    ['{AF3C874B-F0DC-4363-A41C-23EAA7725D2E}']
+    function CalculoImpostoProduto: IModelFiscalNfeRegrasImposto;
+  end;
+
+  IVisitor = interface
+    ['{754F6FB2-CADF-42A7-86BC-44A19EF4F27E}']
+    function Visit(AValue: IModelFiscalNfe): IModelFiscalNfeRegras;
+  end;
+
+  IVisitable = interface
+    ['{C0BB3F72-24DC-400C-9E13-EBDBC7C53988}']
+    function Accept(AValue: IVisitor): IModelFiscalNfeRegras;
+  end;
+
+implementation
+
+end.

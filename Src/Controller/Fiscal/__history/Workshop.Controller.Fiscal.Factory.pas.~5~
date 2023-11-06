@@ -1,0 +1,41 @@
+unit Workshop.Controller.Fiscal.Factory;
+
+interface
+
+uses
+  Workshop.Controller.Fiscal.Factory.Interfaces,
+  Workshop.Controller.Fiscal.NFe.Interfaces;
+
+type
+  TControllerFiscalFactory = class(TInterfacedObject, IControllerFiscalFactory)
+  private
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New: IControllerFiscalFactory;
+    function NFe: IControllerFiscalNFe;
+  end;
+
+implementation
+
+uses
+  Workshop.Controller.Fiscal.NFe;
+
+constructor TControllerFiscalFactory.Create;
+begin
+
+end;
+
+destructor TControllerFiscalFactory.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TControllerFiscalFactory.New: IControllerFiscalFactory;
+begin
+  Result := Self.Create;
+end;
+
+end.

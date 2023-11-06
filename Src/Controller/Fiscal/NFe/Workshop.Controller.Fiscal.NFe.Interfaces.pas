@@ -1,0 +1,18 @@
+unit Workshop.Controller.Fiscal.NFe.Interfaces;
+
+interface
+
+uses
+  Workshop.Utils.Types,
+  Workshop.Model.Fiscal.NFe.Interfaces;
+
+type
+  IControllerFiscalNFe = interface
+    ['{F0FDD637-7670-4331-85DB-7CEF6FD49A4E}']
+    function Model: IModelFiscalNfe;
+    function Notify(AEvent: TEvNotify): IControllerFiscalNFe;
+  end;
+
+implementation
+
+end.

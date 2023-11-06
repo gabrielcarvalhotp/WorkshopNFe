@@ -1,0 +1,53 @@
+unit Workshop.Model.Fiscal.Nfe.Command.Compra;
+
+interface
+
+uses
+  Workshop.Model.Fiscal.Nfe.Interfaces,
+  Workshop.Model.GOF.Command.Interfaces;
+
+Type
+  TModelFiscalNfeCommandCompra = class(TInterfacedObject, ICommand)
+    private
+      FParent : iModelFiscalNfe;
+    public
+      constructor Create(Parent : iModelFiscalNfe);
+      destructor Destroy; override;
+      class function New(Parent : iModelFiscalNfe) : ICommand;
+      function Execute : ICommand;
+  end;
+
+implementation
+
+uses
+  pcnConversaoNFe, pcnConversao;
+
+{ TModelFiscalNfeCommandCompra }
+
+constructor TModelFiscalNfeCommandCompra.Create(Parent : iModelFiscalNfe);
+begin
+  FParent := Parent;
+end;
+
+destructor TModelFiscalNfeCommandCompra.Destroy;
+begin
+
+  inherited;
+end;
+
+function TModelFiscalNfeCommandCompra.Execute: ICommand;
+begin
+  Result := Self;
+  FParent.Component.NotaFiscal.NFe.compra.xNEmp := '';
+  FParent.Component.NotaFiscal.NFe.compra.xPed  := '';
+  FParent.Component.NotaFiscal.NFe.compra.xCont := '';
+  FParent.Observer.Notify('Compra');
+end;
+
+class function TModelFiscalNfeCommandCompra.New(Parent : iModelFiscalNfe) : ICommand;
+begin
+  Result := Self.Create(Parent);
+end;
+
+end.
+

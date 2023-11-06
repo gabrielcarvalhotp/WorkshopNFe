@@ -1,0 +1,16 @@
+unit Workshop.Model.Fiscal.Nfe.Componentes.Interfaces;
+
+interface
+
+uses
+  System.Generics.Collections;
+
+type
+  IModelFiscalNFeComponentes<T> = interface
+    ['{5BCDDC90-02F8-4A34-8B96-37628725634D}']
+    function This: T;
+  end;
+
+implementation
+
+end.

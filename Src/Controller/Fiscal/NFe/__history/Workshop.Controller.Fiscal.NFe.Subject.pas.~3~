@@ -1,0 +1,35 @@
+unit Workshop.Controller.Fiscal.NFe.Subject;
+
+interface
+
+uses
+  Workshop.Model.GOF.Observer.Interfaces;
+
+type
+  TMinhaClasse = class(TInterfacedObject, iMinhaClasse)
+  private
+    constructor Create;
+  public
+    class function New: iMinhaClasse;
+    destructor Destroy; override;
+  end;
+
+implementation
+
+constructor TMinhaClasse.Create;
+begin
+
+end;
+
+destructor TMinhaClasse.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TMinhaClasse.New: iMinhaClasse;
+begin
+  Result := Self.Create;
+end;
+
+end.

@@ -1,0 +1,22 @@
+unit Workshop.Model.GOF.Observer.Interfaces;
+
+interface
+
+uses
+  Workshop.Utils.Types;
+
+type
+  IObserver<T> = interface
+    ['{14E35400-8200-4BDE-B949-E0D06A6C020C}']
+    function Update(AValue: T): IObserver<T>;
+    function EvNotify(AEvent: TEvNotify): IObserver<T>;
+    end;
+
+      ISubject<T> = interface['{45D2E8CB-BA81-49C8-93BA-E29266DE8BE1}']
+      function Add(AObserver: IObserver<T>): ISubject<T>;
+      function Remove(AObserver: IObserver<T>): ISubject<T>;
+      function Notify(AValue: T): ISubject<T>; end;
+
+      implementation
+
+    end.

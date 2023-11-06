@@ -1,0 +1,41 @@
+unit Workshop.View.Principal;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.StdCtrls;
+
+type
+  TViewPrincipal = class(TForm)
+    Button1: TButton;
+    Memo1: TMemo;
+  private
+    { Private declarations }
+  public
+    procedure Nofify(AValue: string);
+  end;
+
+var
+  ViewPrincipal: TViewPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+{ TViewPrincipal }
+
+procedure TViewPrincipal.Nofify(AValue: string);
+begin
+  Memo1.Lines.Add(AValue);
+end;
+
+end.

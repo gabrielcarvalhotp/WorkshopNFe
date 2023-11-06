@@ -1,0 +1,16 @@
+unit Workshop.Controller.Fiscal.NFe.Interfaces;
+
+interface
+
+uses
+  Workshop.Model.Fiscal.NFe;
+
+type
+  IControllerFiscalNFe = interface
+    ['{F0FDD637-7670-4331-85DB-7CEF6FD49A4E}']
+    function NFe: iMo
+    end;
+
+implementation
+
+end.

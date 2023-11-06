@@ -1,0 +1,38 @@
+unit Workshop.Controller.Fiscal.NFe.Subject;
+
+interface
+
+uses
+  Workshop.Model.GOF.Observer.Interfaces;
+
+type
+  TControllerFiscalNFeSubject = class(TInterfacedObject, ISubject<string>)
+  private
+    constructor Create;
+  public
+    class function New: ISubject<string>;
+    destructor Destroy; override;
+    function Add(AObserver: IObserver<string>): ISubject<string>;
+    function Remove(AObserver: IObserver<string>): ISubject<string>;
+    function Notify(AValue: string): ISubject<string>;
+  end;
+
+implementation
+
+constructor TControllerFiscalNFeSubject.Create;
+begin
+
+end;
+
+destructor TControllerFiscalNFeSubject.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TControllerFiscalNFeSubject.New: ISubject<string>;
+begin
+  Result := Self.Create;
+end;
+
+end.

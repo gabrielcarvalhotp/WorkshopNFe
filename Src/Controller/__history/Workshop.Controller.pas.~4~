@@ -1,0 +1,33 @@
+unit Workshop.Controller;
+
+interface
+
+type
+  TMinhaClasse = class(TInterfacedObject, iMinhaClasse)
+  private
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iMinhaClasse;
+  end;
+
+implementation
+
+constructor TMinhaClasse.Create;
+begin
+
+end;
+
+destructor TMinhaClasse.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TMinhaClasse.New: iMinhaClasse;
+begin
+  Result := Self.Create;
+end;
+
+end.

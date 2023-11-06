@@ -1,0 +1,71 @@
+unit Workshop.Model.Fiscal.Nfe.Command.Total;
+
+interface
+
+uses
+  Workshop.Model.Fiscal.Nfe.Interfaces,
+  Workshop.Model.GOF.Command.Interfaces;
+
+Type
+  TFiscalNfeCommandTotal = class(TInterfacedObject, ICommand)
+    private
+      [weak]
+      FParent : IFiscalNfe;
+    public
+      constructor Create(Parent : IFiscalNfe);
+      destructor Destroy; override;
+      class function New(Parent : IFiscalNfe) : ICommand;
+      function Execute : ICommand;
+  end;
+
+implementation
+
+uses
+  pcnConversaoNFe, pcnConversao;
+
+{ TFiscalNfeCommandTotal }
+
+constructor TFiscalNfeCommandTotal.Create(Parent : IFiscalNfe);
+begin
+  FParent := Parent;
+end;
+
+destructor TFiscalNfeCommandTotal.Destroy;
+begin
+
+  inherited;
+end;
+
+function TFiscalNfeCommandTotal.Execute: ICommand;
+begin
+  Result := Self;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vBC     := 100;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vICMS   := 18;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vBCST   := 0;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vST     := 0;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vProd   := 100;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vFrete  := 0;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vSeg    := 0;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vDesc   := 0;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vII     := 0;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vIPI    := 0;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vPIS    := 0;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vCOFINS := 0;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vOutro  := 0;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vNF     := 100;
+
+  // lei da transparencia de impostos
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vTotTrib := 0;
+
+  // partilha do icms e fundo de probreza
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vFCPUFDest   := 0.00;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vICMSUFDest  := 0.00;
+  FParent.Component.NotaFiscal.NFe.Total.ICMSTot.vICMSUFRemet := 0.00;
+end;
+
+class function TFiscalNfeCommandTotal.New(Parent : IFiscalNfe) : ICommand;
+begin
+  Result := Self.Create(Parent);
+end;
+
+end.

@@ -1,0 +1,7 @@
+unit Workshop.Controller.Interfaces;
+
+interface
+
+implementation
+
+end.

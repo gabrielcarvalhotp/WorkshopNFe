@@ -1,0 +1,79 @@
+unit Workshop.Model.Fiscal.Nfe.Regras.Imposto.ICMS.Simples;
+
+interface
+
+uses
+  Workshop.Model.Fiscal.Nfe.Regras.Interfaces,
+  Workshop.Model.GOF.Visitor.Interfaces,
+  Workshop.Model.Fiscal.Nfe.Interfaces;
+
+type
+
+  TModelFiscalNFeRegrasImpostoICMSSimples = class(TInterfacedObject,
+    IModelFiscalNfeRegras, IVisitor<IModelFiscalNfeRegras>)
+  private
+    FParent: IModelFiscalNfe;
+    constructor Create;
+    destructor Destroy; override;
+  public
+    class function New: IModelFiscalNfeRegras;
+    function ProdutoImpostoICMS: IModelFiscalNfeRegras;
+    function Visit(AValue: IInterface): IModelFiscalNfeRegras;
+    function Visitor: IVisitor<IModelFiscalNfeRegras>;
+  end;
+
+implementation
+
+uses
+  pcnConversao;
+
+constructor TModelFiscalNFeRegrasImpostoICMSSimples.Create;
+begin
+
+end;
+
+destructor TModelFiscalNFeRegrasImpostoICMSSimples.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TModelFiscalNFeRegrasImpostoICMSSimples.New
+  : IModelFiscalNfeRegras;
+begin
+  Result := Self.Create;
+end;
+
+function TModelFiscalNFeRegrasImpostoICMSSimples.ProdutoImpostoICMS
+  : IModelFiscalNfeRegras;
+begin
+  Result := Self;
+  FParent.Component.Produto.Imposto.vTotTrib := 0;
+  FParent.Component.Produto.Imposto.ICMS.CST := cst00;
+  FParent.Component.Produto.Imposto.ICMS.orig := oeNacional;
+  FParent.Component.Produto.Imposto.ICMS.modBC := dbiValorOperacao;
+  FParent.Component.Produto.Imposto.ICMS.vBC := 100;
+  FParent.Component.Produto.Imposto.ICMS.pICMS := 18;
+  FParent.Component.Produto.Imposto.ICMS.vICMS := 18;
+  FParent.Component.Produto.Imposto.ICMS.modBCST := dbisMargemValorAgregado;
+  FParent.Component.Produto.Imposto.ICMS.pMVAST := 0;
+  FParent.Component.Produto.Imposto.ICMS.pRedBCST := 0;
+  FParent.Component.Produto.Imposto.ICMS.vBCST := 0;
+  FParent.Component.Produto.Imposto.ICMS.pICMSST := 0;
+  FParent.Component.Produto.Imposto.ICMS.vICMSST := 0;
+  FParent.Component.Produto.Imposto.ICMS.pRedBC := 0;
+end;
+
+function TModelFiscalNFeRegrasImpostoICMSSimples.Visit(AValue: IInterface)
+  : IModelFiscalNfeRegras;
+begin
+  Result := Self;
+  FParent := IModelFiscalNfe(AValue);
+end;
+
+function TModelFiscalNFeRegrasImpostoICMSSimples.Visitor: IVisitor<IModelFiscalNfeRegras>;
+begin
+  Result := Self;
+end;
+
+end.

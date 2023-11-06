@@ -1,0 +1,25 @@
+unit Workshop.Model.Fiscal.Nfe.Componentes.Interfaces;
+
+interface
+
+uses
+  System.Generics.Collections,
+  ACBrNFe,
+  ACBrNFeNotasFiscais;
+
+type
+  IFiscalNFeComponentes<T> = interface
+    ['{5BCDDC90-02F8-4A34-8B96-37628725634D}']
+    function This: T;
+    function AddNotaFiscal: IFiscalNFeComponentes<T>;
+    function NotaFiscal: NotaFiscal;
+  end;
+
+  IFiscalNFeComponentesFactory = interface
+    ['{A834DDEF-9EDD-49AD-8001-AD75713AD0E5}']
+    function ACBr: IFiscalNFeComponentes<TACBrNFe>;
+  end;
+
+implementation
+
+end.

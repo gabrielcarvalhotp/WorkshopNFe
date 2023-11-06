@@ -1,0 +1,18 @@
+unit Workshop.Model.Fiscal.Nfe.Interfaces;
+
+interface
+
+uses
+  Workshop.Model.Fiscal.Nfe.Componentes.Interfaces, ACBrNFe;
+
+type
+  IModelFiscalNfe = interface
+    ['{9E57D0F2-BC59-4F10-B453-7295723BB3BF}']
+    function Clear: IModelFiscalNfe;
+    function GerarNFe: IModelFiscalNfe;
+    function Component: IFiscalNFeComponentes<TACBrNFe>;
+  end;
+
+implementation
+
+end.

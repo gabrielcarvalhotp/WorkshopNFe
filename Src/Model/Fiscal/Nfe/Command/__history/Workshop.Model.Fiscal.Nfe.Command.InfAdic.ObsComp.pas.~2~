@@ -1,0 +1,53 @@
+unit Workshop.Model.Fiscal.Nfe.Command.InfAdic.ObsComp;
+
+interface
+
+uses
+  Workshop.Model.Fiscal.Nfe.Interfaces,
+  Workshop.Model.GOF.Command.Interfaces;
+
+Type
+  TFiscalNfeCommandInfAdicObsComp = class(TInterfacedObject, iCommand)
+    private
+      FParent : iFiscalNfe;
+    public
+      constructor Create(Parent : iFiscalNfe);
+      destructor Destroy; override;
+      class function New(Parent : iFiscalNfe) : iCommand;
+      function Execute : iCommand;
+  end;
+
+implementation
+
+uses
+  pcnConversaoNFe, pcnConversao, System.SysUtils;
+
+{ TFiscalNfeCommandInfAdicObsComp }
+
+constructor TFiscalNfeCommandInfAdicObsComp.Create(Parent : iFiscalNfe);
+begin
+  FParent := Parent;
+end;
+
+destructor TFiscalNfeCommandInfAdicObsComp.Destroy;
+begin
+
+  inherited;
+end;
+
+function TFiscalNfeCommandInfAdicObsComp.Execute: iCommand;
+var
+  I: Integer;
+begin
+  Result := Self;
+  FParent.Component.AddObsComp;
+  FParent.Component.ObsComp.xCampo := 'ObsCont';
+  FParent.Component.ObsComp.xTexto := 'Texto';
+end;
+
+class function TFiscalNfeCommandInfAdicObsComp.New(Parent : iFiscalNfe) : iCommand;
+begin
+  Result := Self.Create(Parent);
+end;
+
+end.

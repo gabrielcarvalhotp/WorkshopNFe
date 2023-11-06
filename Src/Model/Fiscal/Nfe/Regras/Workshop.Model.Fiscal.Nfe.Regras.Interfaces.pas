@@ -1,0 +1,25 @@
+unit Workshop.Model.Fiscal.Nfe.Regras.Interfaces;
+
+interface
+
+uses
+  Workshop.Model.Fiscal.Nfe.Interfaces;
+
+type
+  IModelFiscalNfeRegrasImposto = interface;
+
+  IModelFiscalNfeRegras = interface
+    ['{3BD7420A-3D90-43B7-9EEC-CAAAC00473D1}']
+    function Visit(AValue: IModelFiscalNFe): IModelFiscalNfeRegras;
+    function ProdutoImpostoICMS: IModelFiscalNfeRegras;
+  end;
+
+  IModelFiscalNfeRegrasImposto = interface
+    ['{AF3C874B-F0DC-4363-A41C-23EAA7725D2E}']
+    function Visit( Value : iModelFiscalNFe ) : IModelFiscalNfeRegrasImposto;
+    function CalculoImpostoProduto: IModelFiscalNfeRegrasImposto;
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,47 @@
+unit Workshop.Model.Fiscal.Nfe.Command.Ide;
+
+interface
+
+uses
+  Workshop.Model.GOF.Command.Interfaces,
+  Workshop.Model.Fiscal.Nfe.Interfaces;
+
+type
+  TFiscalNFeCommandIde = class(TInterfacedObject, ICommand)
+  private
+    FParent: IFiscalNfe;
+    constructor Create(Parent: IFiscalNfe);
+    destructor Destroy; override;
+  public
+    class function New(Parent: IFiscalNfe): ICommand;
+    function Execute: ICommand;
+  end;
+
+implementation
+
+constructor TFiscalNFeCommandIde.Create(Parent: IFiscalNfe);
+begin
+  FParent := Parent;
+end;
+
+destructor TFiscalNFeCommandIde.Destroy;
+begin
+
+  inherited;
+end;
+
+function TFiscalNFeCommandIde.Execute: ICommand;
+begin
+  Result := Self;
+  with FParent.Component.AddNotaFiscal.NotaFiscal do
+  begin
+
+  end;
+end;
+
+class function TFiscalNFeCommandIde.New(Parent: IFiscalNfe): ICommand;
+begin
+  Result := Self.Create(Parent);
+end;
+
+end.

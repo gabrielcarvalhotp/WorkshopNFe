@@ -1,0 +1,29 @@
+unit Workshop.Model.Fiscal.Nfe.Interfaces;
+
+interface
+
+uses
+  Workshop.Model.Fiscal.Nfe.Componentes.Interfaces, ACBrNFe;
+
+type
+  IFiscalNfe = interface
+    ['{9E57D0F2-BC59-4F10-B453-7295723BB3BF}']
+    function Clear: IFiscalNfe;
+    function GerarNFe: IFiscalNfe;
+    function Component: IFiscalNFeComponentes<TACBrNFe>;
+  end;
+
+  ICommand = interface
+    ['{E5775426-BEAD-41A2-A14C-6655CCCC158A}']
+    function Execute: ICommand;
+  end;
+
+  IInvoker = interface
+    ['{8F9DBF72-545B-494B-8A97-03AF235A5B7B}']
+    function Add(Value: ICommand): IInvoker;
+    function Execute: IInvoker;
+  end;
+
+implementation
+
+end.

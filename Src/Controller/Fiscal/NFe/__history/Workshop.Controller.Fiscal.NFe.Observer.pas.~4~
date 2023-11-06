@@ -1,0 +1,40 @@
+unit Workshop.Controller.Fiscal.NFe.Observer;
+
+interface
+
+uses
+  System.Classes,
+  System.SysUtils,
+  Workshop.Model.GOF.Observer.Interfaces;
+
+type
+  TControllerFiscalNFeObserver = class(TInterfacedObject, IObserver<string>)
+  private
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New: IObserver<string>;
+    function Update(AValue: T): IObserver<T>;
+    function EvNotify(AEvent: TEvNotify): IObserver<T>;
+  end;
+
+implementation
+
+constructor TControllerFiscalNFeObserver.Create;
+begin
+
+end;
+
+destructor TControllerFiscalNFeObserver.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TControllerFiscalNFeObserver.New: IObserver<string>;
+begin
+  Result := Self.Create;
+end;
+
+end.

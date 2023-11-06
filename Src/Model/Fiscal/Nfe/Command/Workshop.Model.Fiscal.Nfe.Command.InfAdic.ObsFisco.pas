@@ -1,0 +1,51 @@
+unit Workshop.Model.Fiscal.Nfe.Command.InfAdic.ObsFisco;
+
+interface
+
+uses
+  Workshop.Model.Fiscal.Nfe.Interfaces,
+  Workshop.Model.GOF.Command.Interfaces;
+
+Type
+  TModelFiscalNfeCommandInfAdicObsFisco = class(TInterfacedObject, iCommand)
+    private
+      FParent : IModelFiscalNfe;
+    public
+      constructor Create(Parent : IModelFiscalNfe);
+      destructor Destroy; override;
+      class function New(Parent : IModelFiscalNfe) : iCommand;
+      function Execute : iCommand;
+  end;
+
+implementation
+
+uses
+  pcnConversaoNFe, pcnConversao, System.SysUtils;
+
+{ TModelFiscalNfeCommandInfAdicObsFisco }
+
+constructor TModelFiscalNfeCommandInfAdicObsFisco.Create(Parent : IModelFiscalNfe);
+begin
+  FParent := Parent;
+end;
+
+destructor TModelFiscalNfeCommandInfAdicObsFisco.Destroy;
+begin
+
+  inherited;
+end;
+
+function TModelFiscalNfeCommandInfAdicObsFisco.Execute: iCommand;
+begin
+  Result := Self;
+  FParent.Component.AddObsFisco;
+  FParent.Component.ObsFisco.xCampo := 'ObsFisco';
+  FParent.Component.ObsFisco.xTexto := 'Texto';
+end;
+
+class function TModelFiscalNfeCommandInfAdicObsFisco.New(Parent : IModelFiscalNfe) : iCommand;
+begin
+  Result := Self.Create(Parent);
+end;
+
+end.

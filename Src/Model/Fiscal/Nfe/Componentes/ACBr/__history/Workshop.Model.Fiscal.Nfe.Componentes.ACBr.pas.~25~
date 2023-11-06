@@ -1,0 +1,53 @@
+unit Workshop.Model.Fiscal.Nfe.Componentes.ACBr;
+
+interface
+
+uses
+  System.SysUtils,
+  System.Classes,
+  ACBrBase,
+  ACBrDFe,
+  ACBrNFe,
+  ACBrDFeReport,
+  ACBrDFeDANFeReport,
+  ACBrNFeDANFEClass,
+  ACBrNFeDANFeRLClass,
+  ACBrNFeNotasFiscais,
+  Workshop.Model.Fiscal.Nfe.Componentes.Interfaces;
+
+type
+  TDtmACBrNfe = class(TDataModule, IFiscalNFeComponentes<TACBrNFe>)
+    ACBrNFe1: TACBrNFe;
+    ACBrNFeDANFeRL1: TACBrNFeDANFeRL;
+  private
+    FNotaFiscal: NotaFiscal;
+  public
+    function This: TACBrNFe;
+    function AddNotaFiscal: IFiscalNFeComponentes<TACBrNFe>;
+    function NotaFiscal: NotaFiscal;
+  end;
+
+implementation
+
+{$R *.dfm}
+
+function TDtmACBrNfe.AddNotaFiscal: IFiscalNFeComponentes<TACBrNFe>;
+begin
+  Result := Self;
+  FNotaFiscal := ACBrNFe1.NotasFiscais.Add;
+end;
+
+function TDtmACBrNfe.NotaFiscal: NotaFiscal;
+begin
+  Result := FNotaFiscal;
+end;
+
+function TDtmACBrNfe.This: TACBrNFe;
+var
+  A, B, C: string;
+begin
+  Result := ACBrNFe1;
+
+end;
+
+end.

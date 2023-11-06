@@ -1,0 +1,60 @@
+unit Workshop.Model.Fiscal.Nfe.Regras.Imposto.ICMS.RegimeNormal;
+
+interface
+
+uses
+  Workshop.Model.Fiscal.Nfe.Regras.Interfaces,
+  Workshop.Model.GOF.Visitor.Interfaces,
+  Workshop.Model.Fiscal.Nfe.Interfaces;
+
+type
+  TModelFiscalNFeRegrasImpostoICMSRegimeNormal = class(TInterfacedObject, IModelFiscalNfeRegras)
+  private
+    FParent: IModelFiscalNfe;
+    constructor Create;
+  public
+    class function New: IModelFiscalNfeRegras;
+    destructor Destroy; override;
+    function ProdutoImpostoICMS: IModelFiscalNfeRegras;
+    function Visit(AValue: IModelFiscalNfe): IModelFiscalNfeRegras;
+  end;
+
+implementation
+
+uses
+  pcnConversao;
+
+constructor TModelFiscalNFeRegrasImpostoICMSRegimeNormal.Create;
+begin
+
+end;
+
+destructor TModelFiscalNFeRegrasImpostoICMSRegimeNormal.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TModelFiscalNFeRegrasImpostoICMSRegimeNormal.New: IModelFiscalNfeRegras;
+begin
+  Result := Self.Create;
+end;
+
+function TModelFiscalNFeRegrasImpostoICMSRegimeNormal.ProdutoImpostoICMS: IModelFiscalNfeRegras;
+begin
+  Result := Self;
+  FParent.Component.Produto.Imposto.vTotTrib := 0;
+  FParent.Component.Produto.Imposto.ICMS.CST := cst00;
+  FParent.Component.Produto.Imposto.ICMS.orig := oeNacional;
+  FParent.Component.Produto.Imposto.ICMS.modBC := dbiValorOperacao;
+
+  ace
+end;
+
+function TModelFiscalNFeRegrasImpostoICMSRegimeNormal.Visit(AValue: IModelFiscalNfe): IModelFiscalNfeRegras;
+begin
+  Result := Self;
+  FParent := AValue;
+end;
+
+end.
